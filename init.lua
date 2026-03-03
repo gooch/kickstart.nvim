@@ -614,7 +614,7 @@ require('lazy').setup({
       -- You can press `g?` for help in this menu.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'lua_ls', -- Lua Language server
+        'lua-language-server', -- Lua Language server
         'stylua', -- Used to format Lua code
         -- You can add other tools here that you want Mason to install
       })
@@ -887,6 +887,21 @@ require('lazy').setup({
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
+  {
+    'nvim-orgmode/orgmode',
+    event = 'VeryLazy',
+    ft = { 'org' },
+    config = function()
+      -- Setup orgmode
+      require('orgmode').setup({
+        org_agenda_files = '~/org/**/*',
+        org_default_notes_file = '~/org/refile.org',
+      })
+
+      -- Experimental LSP support
+      vim.lsp.enable('org')
+    end,
+  }
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
